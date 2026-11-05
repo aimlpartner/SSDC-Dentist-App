@@ -1,0 +1,6 @@
+{
+  "name": "Taj White Pearl - Luxury Dental Hospital Agra",
+  "description": "Agra's premier dental hospital inspired by the Taj Mahal. Offering world-class dentistry for local and foreign dental tourists, AI voice calling agent, automated WhatsApp/email reminders, and multi-doctor management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
