@@ -1,50 +1,63 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import Navbar, { AppView } from '../components/Navbar';
-import HeroSection from '../components/HeroSection';
-import DentalTourismSection from '../components/DentalTourismSection';
-import ServicesSection from '../components/ServicesSection';
-import DoctorsSection from '../components/DoctorsSection';
-import TestimonialsSection from '../components/TestimonialsSection';
-import Footer from '../components/Footer';
-import AdminDashboard from '../components/AdminDashboard';
-import ForeignClientPortal from '../components/ForeignClientPortal';
-import DoctorPortal from '../components/DoctorPortal';
-import BookingModal from '../components/BookingModal';
-import AICallingAgentModal from '../components/AICallingAgentModal';
-import WhatsAppConciergeModal from '../components/WhatsAppConciergeModal';
+import React, { useState, useMemo } from 'react';
+import Navbar, { AppView } from '@/components/Navbar';
 
-import { 
-  Appointment, 
-  Doctor, 
-  NotificationLog, 
-  Patient, 
-  AppointmentStatus, 
-  NotificationTrigger 
-} from '../lib/types';
-import { 
-  INITIAL_APPOINTMENTS, 
-  INITIAL_DOCTORS, 
-  INITIAL_NOTIFICATIONS, 
-  INITIAL_PATIENTS 
-} from '../lib/mock-data';
-import { 
-  computeClinicStats, 
-  generateNotificationMessage 
-} from '../lib/dental-logic';
+// ============================================================================
+// PILLAR 1: Public Marketing & Dental Tourism Landing Page (`@/modules/landing`)
+// ============================================================================
+import {
+  HeroSection,
+  DentalTourismSection,
+  ServicesSection,
+  DoctorsSection,
+  TestimonialsSection,
+  Footer,
+} from '@/modules/landing';
+
+// ============================================================================
+// PILLAR 2: Core Dental Clinic CRM, EHR, Portals & Domain (`@/modules/clinic`)
+// ============================================================================
+import {
+  AdminDashboard,
+  ForeignClientPortal,
+  DoctorPortal,
+  BookingModal,
+  Appointment,
+  Doctor,
+  NotificationLog,
+  Patient,
+  AppointmentStatus,
+  NotificationTrigger,
+  INITIAL_APPOINTMENTS,
+  INITIAL_DOCTORS,
+  INITIAL_NOTIFICATIONS,
+  INITIAL_PATIENTS,
+  computeClinicStats,
+  generateNotificationMessage,
+  buildTajClinicAIConfig,
+} from '@/modules/clinic';
+
+// ============================================================================
+// PILLAR 3: Standalone Medical AI Agents Product / SDK (`@/modules/ai-agents`)
+// ============================================================================
+import {
+  AICallingAgentWidget,
+  WhatsAppConciergeWidget,
+  MedicalCRMAdapter,
+} from '@/modules/ai-agents';
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<AppView>('landing');
   const [selectedCurrency, setSelectedCurrency] = useState<'USD' | 'INR' | 'GBP' | 'EUR'>('USD');
 
-  // Application State
+  // Pillar 2: Clinic CRM & EHR State
   const [doctors, setDoctors] = useState<Doctor[]>(INITIAL_DOCTORS);
   const [patients, setPatients] = useState<Patient[]>(INITIAL_PATIENTS);
   const [appointments, setAppointments] = useState<Appointment[]>(INITIAL_APPOINTMENTS);
   const [notifications, setNotifications] = useState<NotificationLog[]>(INITIAL_NOTIFICATIONS);
 
-  // Modals
+  // Interactive Modals
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isCallingAgentOpen, setIsCallingAgentOpen] = useState(false);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
@@ -57,7 +70,9 @@ export default function Home() {
     setAppointments((prev) => [newApt, ...prev]);
 
     // Check if patient exists, if not, create new patient record
-    const patientExists = patients.some(p => p.fullName.toLowerCase() === newApt.patientName.toLowerCase());
+    const patientExists = patients.some(
+      (p) => p.fullName.toLowerCase() === newApt.patientName.toLowerCase()
+    );
     if (!patientExists) {
       const newPatient: Patient = {
         id: newApt.patientId,
@@ -72,14 +87,16 @@ export default function Home() {
       };
       setPatients((prev) => [newPatient, ...prev]);
     } else {
-      setPatients((prev) => prev.map(p => 
-        p.fullName.toLowerCase() === newApt.patientName.toLowerCase() 
-          ? { ...p, totalVisits: p.totalVisits + 1 }
-          : p
-      ));
+      setPatients((prev) =>
+        prev.map((p) =>
+          p.fullName.toLowerCase() === newApt.patientName.toLowerCase()
+            ? { ...p, totalVisits: p.totalVisits + 1 }
+            : p
+        )
+      );
     }
 
-    // Automatically generate and dispatch both an Email confirmation and a WhatsApp notification!
+    // Automatically generate and dispatch both an Email confirmation and a WhatsApp notification
     const sample = {
       appointmentNumber: newApt.appointmentNumber,
       patientName: newApt.patientName,
@@ -128,16 +145,17 @@ export default function Home() {
 
   // Handler: Update Appointment Status
   const handleUpdateStatus = (appointmentId: string, newStatus: AppointmentStatus) => {
-    setAppointments((prev) => prev.map(apt => {
-      if (apt.id === appointmentId) {
-        return { ...apt, status: newStatus };
-      }
-      return apt;
-    }));
+    setAppointments((prev) =>
+      prev.map((apt) => {
+        if (apt.id === appointmentId) {
+          return { ...apt, status: newStatus };
+        }
+        return apt;
+      })
+    );
 
-    // If marked completed, automatically send post-treatment rating request via WhatsApp & Email!
     if (newStatus === 'completed') {
-      const apt = appointments.find(a => a.id === appointmentId);
+      const apt = appointments.find((a) => a.id === appointmentId);
       if (apt) {
         const sample = {
           appointmentNumber: apt.appointmentNumber,
@@ -169,23 +187,28 @@ export default function Home() {
   };
 
   // Handler: Reschedule Appointment
-  const handleRescheduleAppointment = (appointmentNumber: string, newDate: string, newTime: string): boolean => {
-    const targetApt = appointments.find(a => a.appointmentNumber === appointmentNumber);
+  const handleRescheduleAppointment = (
+    appointmentNumber: string,
+    newDate: string,
+    newTime: string
+  ): boolean => {
+    const targetApt = appointments.find((a) => a.appointmentNumber === appointmentNumber);
     if (!targetApt) return false;
 
-    setAppointments((prev) => prev.map(apt => {
-      if (apt.appointmentNumber === appointmentNumber) {
-        return {
-          ...apt,
-          date: newDate,
-          timeSlot: newTime,
-          status: 'rescheduled' as AppointmentStatus,
-        };
-      }
-      return apt;
-    }));
+    setAppointments((prev) =>
+      prev.map((apt) => {
+        if (apt.appointmentNumber === appointmentNumber) {
+          return {
+            ...apt,
+            date: newDate,
+            timeSlot: newTime,
+            status: 'rescheduled' as AppointmentStatus,
+          };
+        }
+        return apt;
+      })
+    );
 
-    // Dispatch reschedule confirmation notification
     const rescheduleLog: NotificationLog = {
       id: `notif-resched-${Date.now()}`,
       appointmentId: targetApt.id,
@@ -196,7 +219,7 @@ export default function Home() {
       channel: 'whatsapp',
       trigger: 'booking_confirmation',
       subject: `Appointment Rescheduled: #${targetApt.appointmentNumber}`,
-      messageContent: `📅 Your appointment at Taj White Pearl has been rescheduled to ${newDate} at ${newTime} with ${targetApt.doctorName}. We look forward to seeing you in Agra!`,
+      messageContent: `Your appointment at SSDC Dental Clinic has been rescheduled to ${newDate} at ${newTime} with ${targetApt.doctorName}. We look forward to seeing you in Agra!`,
       sentAt: new Date().toLocaleString([], { dateStyle: 'short', timeStyle: 'short' }),
       status: 'delivered',
     };
@@ -207,15 +230,17 @@ export default function Home() {
 
   // Handler: Cancel Appointment
   const handleCancelAppointment = (appointmentNumber: string): boolean => {
-    setAppointments((prev) => prev.map(apt => {
-      if (apt.appointmentNumber === appointmentNumber) {
-        return {
-          ...apt,
-          status: 'cancelled' as AppointmentStatus,
-        };
-      }
-      return apt;
-    }));
+    setAppointments((prev) =>
+      prev.map((apt) => {
+        if (apt.appointmentNumber === appointmentNumber) {
+          return {
+            ...apt,
+            status: 'cancelled' as AppointmentStatus,
+          };
+        }
+        return apt;
+      })
+    );
     return true;
   };
 
@@ -224,54 +249,65 @@ export default function Home() {
     setDoctors((prev) => [...prev, newDoc]);
   };
 
-  // Handler: Add Review / Rating (from Client Portal or WhatsApp)
+  // Handler: Add Review / Rating (from Client Portal or WhatsApp AI Agent)
   const handleAddReview = (appointmentNumber: string, rating: number, feedback: string) => {
-    setAppointments((prev) => prev.map(apt => {
-      if (apt.appointmentNumber === appointmentNumber) {
-        return {
-          ...apt,
-          rating,
-          reviewFeedback: feedback,
-        };
-      }
-      return apt;
-    }));
-
-    // Update doctor's review count
-    const targetApt = appointments.find(a => a.appointmentNumber === appointmentNumber);
-    if (targetApt) {
-      setDoctors((prev) => prev.map(doc => {
-        if (doc.name === targetApt.doctorName || doc.id === targetApt.doctorId) {
-          const newCount = doc.reviewCount + 1;
-          const newRating = Number(((doc.rating * doc.reviewCount + rating) / newCount).toFixed(2));
-          return { ...doc, reviewCount: newCount, rating: newRating };
+    setAppointments((prev) =>
+      prev.map((apt) => {
+        if (apt.appointmentNumber === appointmentNumber) {
+          return {
+            ...apt,
+            rating,
+            reviewFeedback: feedback,
+          };
         }
-        return doc;
-      }));
+        return apt;
+      })
+    );
+
+    const targetApt = appointments.find((a) => a.appointmentNumber === appointmentNumber);
+    if (targetApt) {
+      setDoctors((prev) =>
+        prev.map((doc) => {
+          if (doc.name === targetApt.doctorName || doc.id === targetApt.doctorId) {
+            const newCount = doc.reviewCount + 1;
+            const newRating = Number(
+              ((doc.rating * doc.reviewCount + rating) / newCount).toFixed(2)
+            );
+            return { ...doc, reviewCount: newCount, rating: newRating };
+          }
+          return doc;
+        })
+      );
     }
   };
 
   // Handler: Doctor saves clinical notes & Rx
-  const handleSaveClinicalNotes = (appointmentId: string, notes: string, prescriptions: string[]) => {
-    setAppointments((prev) => prev.map(apt => {
-      if (apt.id === appointmentId) {
-        return {
-          ...apt,
-          clinicalNotes: notes,
-          prescriptions,
-        };
-      }
-      return apt;
-    }));
+  const handleSaveClinicalNotes = (
+    appointmentId: string,
+    notes: string,
+    prescriptions: string[]
+  ) => {
+    setAppointments((prev) =>
+      prev.map((apt) => {
+        if (apt.id === appointmentId) {
+          return {
+            ...apt,
+            clinicalNotes: notes,
+            prescriptions,
+          };
+        }
+        return apt;
+      })
+    );
   };
 
   // Handler: Manually trigger automated notification for demo / testing
   const handleTriggerNotification = (
-    trigger: NotificationTrigger, 
-    appointmentId: string, 
+    trigger: NotificationTrigger,
+    appointmentId: string,
     channel: 'email' | 'whatsapp'
   ) => {
-    const apt = appointments.find(a => a.id === appointmentId) || appointments[0];
+    const apt = appointments.find((a) => a.id === appointmentId) || appointments[0];
     if (!apt) return;
 
     const sample = {
@@ -304,9 +340,21 @@ export default function Home() {
     setNotifications((prev) => [newLog, ...prev]);
   };
 
+  // Pillar 2 -> Pillar 3 Bridge: Facility Config & CRM Adapter
+  const aiFacilityConfig = useMemo(() => buildTajClinicAIConfig(doctors), [doctors]);
+
+  const clinicCRMAdapter: MedicalCRMAdapter<Appointment, Doctor> = {
+    appointments,
+    doctors,
+    onBookAppointment: handleBookAppointment,
+    onRescheduleAppointment: handleRescheduleAppointment,
+    onCancelAppointment: handleCancelAppointment,
+    onAddReview: handleAddReview,
+    onOpenCallingAgent: () => setIsCallingAgentOpen(true),
+  };
+
   return (
-    <div className="min-h-screen bg-white text-stone-900 selection:bg-amber-200 selection:text-amber-950 font-sans">
-      
+    <div className="min-h-screen bg-white text-stone-900 selection:bg-[#7B1123] selection:text-white font-sans">
       {/* Universal Navbar */}
       <Navbar
         currentView={currentView}
@@ -324,6 +372,7 @@ export default function Home() {
 
       {/* Main View Router */}
       <main>
+        {/* PILLAR 1: Public Landing Page */}
         {currentView === 'landing' && (
           <>
             <HeroSection
@@ -359,6 +408,7 @@ export default function Home() {
           </>
         )}
 
+        {/* PILLAR 2: Core Dental Clinic CRM, EHR & Portals */}
         {currentView === 'admin' && (
           <AdminDashboard
             appointments={appointments}
@@ -397,7 +447,7 @@ export default function Home() {
         )}
       </main>
 
-      {/* Interactive Modals */}
+      {/* PILLAR 2: Clinic Booking Modal */}
       <BookingModal
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
@@ -409,26 +459,20 @@ export default function Home() {
         selectedCurrency={selectedCurrency}
       />
 
-      <AICallingAgentModal
+      {/* PILLAR 3: Plug-and-Play Medical AI Agents Suite (Voice + WhatsApp) */}
+      <AICallingAgentWidget
         isOpen={isCallingAgentOpen}
         onClose={() => setIsCallingAgentOpen(false)}
-        appointments={appointments}
-        doctors={doctors}
-        onBookAppointment={handleBookAppointment}
-        onRescheduleAppointment={handleRescheduleAppointment}
-        onCancelAppointment={handleCancelAppointment}
+        config={aiFacilityConfig}
+        crm={clinicCRMAdapter}
       />
 
-      <WhatsAppConciergeModal
+      <WhatsAppConciergeWidget
         isOpen={isWhatsAppOpen}
         onClose={() => setIsWhatsAppOpen(false)}
-        appointments={appointments}
-        notifications={notifications}
-        onRescheduleAppointment={handleRescheduleAppointment}
-        onAddReview={handleAddReview}
-        onOpenCallingAgent={() => setIsCallingAgentOpen(true)}
+        config={aiFacilityConfig}
+        crm={clinicCRMAdapter}
       />
-
     </div>
   );
 }

@@ -1,1 +1,55 @@
 @import "tailwindcss";
+
+@theme {
+  --font-heading: "Urbanist", sans-serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --color-maroon: #7B1123;
+  --color-maroon-dark: #580B18;
+  --color-gold: #D4AF37;
+  --color-gold-warm: #C59B27;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: #ffffff;
+  }
+  
+  h1, h2, h3, h4, .font-funky {
+    font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
+
+  html[data-font="urbanist"] h1,
+  html[data-font="urbanist"] h2,
+  html[data-font="urbanist"] h3,
+  html[data-font="urbanist"] h4,
+  html[data-font="urbanist"] .font-funky {
+    font-family: "Urbanist", sans-serif;
+  }
+
+  html[data-font="syne"] h1,
+  html[data-font="syne"] h2,
+  html[data-font="syne"] h3,
+  html[data-font="syne"] h4,
+  html[data-font="syne"] .font-funky {
+    font-family: "Syne", sans-serif;
+  }
+
+  html[data-font="instrument"] h1,
+  html[data-font="instrument"] h2,
+  html[data-font="instrument"] h3,
+  html[data-font="instrument"] h4,
+  html[data-font="instrument"] .font-funky {
+    font-family: "Instrument Sans", sans-serif;
+  }
+
+  html[data-font="jakarta"] h1,
+  html[data-font="jakarta"] h2,
+  html[data-font="jakarta"] h3,
+  html[data-font="jakarta"] h4,
+  html[data-font="jakarta"] .font-funky {
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+}

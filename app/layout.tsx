@@ -1,25 +1,41 @@
-import type {Metadata} from 'next';
-import './globals.css'; // Global styles
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Taj White Pearl - Luxury Dental Hospital Agra',
-  description: 'Agra\'s premier dental hospital inspired by the Taj Mahal. Offering world-class dentistry for local and foreign dental tourists, AI voice calling agent, automated WhatsApp/email reminders, and multi-doctor management.',
+  title: 'SSDC — Modern Dental Clinic & Smile Care, Agra',
+  description:
+    'SSDC Agra: Modern painless implantology, instant laser teeth whitening, handcrafted porcelain veneers, and friendly dental care opposite the Taj Mahal.',
   openGraph: {
-    title: 'Taj White Pearl - Luxury Dental Hospital Agra',
-    description: 'Agra\'s premier dental hospital inspired by the Taj Mahal. Offering world-class dentistry for local and foreign dental tourists, AI voice calling agent, automated WhatsApp/email reminders, and multi-doctor management.',
+    title: 'SSDC — Modern Dental Clinic & Smile Care, Agra',
+    description:
+      'SSDC Agra: Modern painless implantology, instant laser teeth whitening, handcrafted porcelain veneers, and friendly dental care opposite the Taj Mahal.',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Taj White Pearl - Luxury Dental Hospital Agra',
-    description: 'Agra\'s premier dental hospital inspired by the Taj Mahal. Offering world-class dentistry for local and foreign dental tourists, AI voice calling agent, automated WhatsApp/email reminders, and multi-doctor management.',
+    title: 'SSDC — Modern Dental Clinic & Smile Care, Agra',
+    description:
+      'SSDC Agra: Modern painless implantology, instant laser teeth whitening, handcrafted porcelain veneers, and friendly dental care opposite the Taj Mahal.',
   },
 };
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning>{children}</body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Syne:wght@700;800&family=Urbanist:wght@600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body
+        suppressHydrationWarning
+        className="bg-white text-stone-900 antialiased selection:bg-[#7B1123] selection:text-white"
+      >
+        {children}
+      </body>
     </html>
   );
 }
