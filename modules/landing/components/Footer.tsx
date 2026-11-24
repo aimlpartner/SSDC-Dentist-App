@@ -87,14 +87,14 @@ export default function Footer({
             <p className="text-stone-600 leading-relaxed flex items-start gap-2">
               <MapPin className="w-4 h-4 text-[#7B1123] shrink-0 mt-0.5" />
               <span>
-                14 Fatehabad Road, Opposite Taj East Gate Rd,
+                Kareem Shah Complex, Fatehabad Road (Opp. Pizza Hut),
                 <br />
-                Agra, Uttar Pradesh 282001, India
+                Tajganj, Agra, Uttar Pradesh 282001, India
               </span>
             </p>
             <p className="text-stone-800 flex items-center gap-2 font-bold">
               <Phone className="w-4 h-4 text-[#7B1123] shrink-0" />
-              <span>+91 562 222 8490</span>
+              <span>+91 94157 66886</span>
             </p>
           </div>
 

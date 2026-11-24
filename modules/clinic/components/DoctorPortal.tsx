@@ -30,7 +30,7 @@ export default function DoctorPortal({
   onSaveClinicalNotes,
 }: DoctorPortalProps) {
   const [selectedDoctorId, setSelectedDoctorId] = useState<string>(
-    doctors[0]?.id || 'doc-aarav'
+    doctors[0]?.id || 'doc-saurabh'
   );
   const activeDoctor =
     doctors.find((d) => d.id === selectedDoctorId) || doctors[0];

@@ -75,7 +75,7 @@ export default function BookingModal({
   );
   const [problemDescription, setProblemDescription] = useState('');
   const [selectedDoctorId, setSelectedDoctorId] = useState(
-    doctors[0]?.id || 'doc-aarav'
+    doctors[0]?.id || 'doc-saurabh'
   );
 
   // Date & Slot

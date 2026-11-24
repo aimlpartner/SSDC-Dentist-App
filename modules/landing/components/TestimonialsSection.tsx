@@ -12,7 +12,7 @@ export default function TestimonialsSection() {
       origin: 'London, United Kingdom',
       treatment: '6 E-Max Porcelain Veneers',
       quote:
-        'I flew to India to visit the Taj Mahal and fix my smile. The team at SSDC arranged my Oberoi hotel transfer, and Dr. Ananya gave me the most radiant, natural veneers I could ever imagine. I saved over £4,000 compared to London Harley Street.',
+        'I flew to India to visit the Taj Mahal and fix my smile. The team at SSDC arranged my Oberoi hotel transfer, and Dr. Sapna gave me the most radiant, natural veneers I could ever imagine. I saved over £4,000 compared to London Harley Street.',
       avatar:
         'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
     },
@@ -22,7 +22,7 @@ export default function TestimonialsSection() {
       origin: 'Sydney, Australia',
       treatment: 'German Zirconia Implant',
       quote:
-        'Dr. Aarav Sharma is a genius implantologist. The 3D CBCT guided surgery was 100% painless. I was walking around Agra Fort the very next afternoon. The WhatsApp concierge sent all my appointment reminders effortlessly.',
+        'Dr. Saurabh is a brilliant dental surgeon. The 3D CBCT guided implant procedure was 100% painless. I was walking around Agra Fort the very next afternoon. The WhatsApp desk sent all my appointment reminders effortlessly.',
       avatar:
         'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
     },

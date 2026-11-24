@@ -174,7 +174,7 @@ export function generateNotificationMessage(
       case 'booking_confirmation':
         return {
           subject: `WhatsApp: Booking Confirmed [${appointmentNumber}]`,
-          body: `*SSDC Dental Clinic, Agra*\n\nNamaste ${patientName},\nYour appointment *#${appointmentNumber}* has been confirmed!\n\n*Doctor:* ${doctorName}\n*Date:* ${date}\n*Time:* ${timeSlot}\n*Treatment:* ${problemCategory}\n*Location:* Opposite Taj East Gate Rd, Agra\n\n${isInternational ? '*Dental Tourism Support:* Our team is ready with hotel guidance near the Taj Mahal and airport pickup assistance.\n\n' : ''}Need to reschedule? Reply *RESCHEDULE* or call our reception desk at +91-562-TAJ-DENT.`,
+          body: `*SSDC Dental Clinic, Agra*\n\nNamaste ${patientName},\nYour appointment *#${appointmentNumber}* has been confirmed!\n\n*Doctor:* ${doctorName}\n*Date:* ${date}\n*Time:* ${timeSlot}\n*Treatment:* ${problemCategory}\n*Location:* Kareem Shah Complex, Fatehabad Road, Tajganj, Agra\n\n${isInternational ? '*Dental Tourism Support:* Our team is ready with hotel guidance near the Taj Mahal and airport pickup assistance.\n\n' : ''}Need to reschedule? Reply *RESCHEDULE* or call our reception desk at +91 94157 66886.`,
         };
       case 'reminder_24h':
         return {
@@ -204,7 +204,7 @@ export function generateNotificationMessage(
     case 'booking_confirmation':
       return {
         subject: `Your SSDC Agra Appointment is Confirmed (#${appointmentNumber})`,
-        body: `Dear ${patientName},\n\nWe are delighted to welcome you to SSDC Dental Sanctuary in Agra, India.\n\nAPPOINTMENT DETAILS:\n- Reference ID: #${appointmentNumber}\n- Assigned Specialist: ${doctorName}\n- Date & Slot: ${date} at ${timeSlot}\n- Procedure: ${problemCategory}\n- Address: 14 Fatehabad Road, Opposite Taj East Gate, Agra, UP, India\n\n${isInternational ? 'INTERNATIONAL GUEST CONCIERGE:\nAs our international dental tourist, our travel team has noted your visit. We provide luxury hotel booking coordination near the Taj Mahal, sanitized private chauffeur pickups, and currency exchange guidance.\n\n' : ''}If you need to adjust or reschedule your timing, our reception desk and patient care portal are available anytime.\n\nWarm regards,\nSSDC Agra Patient Experience Team`,
+        body: `Dear ${patientName},\n\nWe are delighted to welcome you to SSDC Dental Sanctuary in Agra, India.\n\nAPPOINTMENT DETAILS:\n- Reference ID: #${appointmentNumber}\n- Assigned Specialist: ${doctorName}\n- Date & Slot: ${date} at ${timeSlot}\n- Procedure: ${problemCategory}\n- Address: Kareem Shah Complex, Fatehabad Road (Opposite Pizza Hut), Tajganj, Agra, UP 282001\n\n${isInternational ? 'INTERNATIONAL GUEST CONCIERGE:\nAs our international dental tourist, our travel team has noted your visit. We provide luxury hotel booking coordination near the Taj Mahal, sanitized private chauffeur pickups, and currency exchange guidance.\n\n' : ''}If you need to adjust or reschedule your timing, our reception desk and patient care portal are available anytime.\n\nWarm regards,\nSSDC Agra Patient Experience Team`,
       };
     case 'reminder_24h':
       return {

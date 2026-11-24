@@ -87,7 +87,7 @@ export default function WhatsAppConciergeWidget<
     appointments[0];
 
   const defaultAptCode = `${config.appointmentPrefix}-1042`;
-  const defaultDocName = config.doctors[0]?.name || 'Dr. Ananya Verma';
+  const defaultDocName = config.doctors[0]?.name || 'Dr. Saurabh';
 
   const [chatMessages, setChatMessages] = useState<
     Array<{

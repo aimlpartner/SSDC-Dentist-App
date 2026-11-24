@@ -114,7 +114,7 @@ export default function AdminDashboard({
     'Acute Tooth Pain & Swelling'
   );
   const [walkinDoctorId, setWalkinDoctorId] = useState(
-    doctors[0]?.id || 'doc-aarav'
+    doctors[0]?.id || 'doc-saurabh'
   );
   const [walkinNotes, setWalkinNotes] = useState(
     'Patient walked in directly to SSDC Agra reception.'
