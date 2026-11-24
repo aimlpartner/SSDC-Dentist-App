@@ -1,12 +1,14 @@
 {
-  "name": "ai-studio-applet",
-  "version": "0.1.0",
+  "name": "ssdc-dentist-app",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test lib/dental-logic.test.ts modules/ai-agents/core/agent-engine.test.ts",
     "clean": "next clean"
   },
   "dependencies": {
