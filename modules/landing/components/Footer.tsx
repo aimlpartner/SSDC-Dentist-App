@@ -71,11 +71,11 @@ export default function Footer({
               <span className="font-funky font-extrabold text-2xl text-[#7B1123]">SSDC</span>
             </div>
             <p className="text-stone-500 leading-relaxed">
-              Agra&apos;s premier dental hospital and international smile sanctuary, adjacent to the Taj Mahal East Gate.
+              Healthy Smile....Forever — landmark oral health care in Agra combining advanced expertise, modern technology, and gentle personal care.
             </p>
             <div className="flex items-center gap-1.5 text-xs font-bold text-[#7B1123]">
               <ShieldCheck className="w-4 h-4 text-[#D4AF37]" />
-              <span>NABH Accredited &middot; ISO 9001 Certified</span>
+              <span>4.7 Google Rated &middot; IDA Registered</span>
             </div>
           </div>
 
@@ -87,9 +87,9 @@ export default function Footer({
             <p className="text-stone-600 leading-relaxed flex items-start gap-2">
               <MapPin className="w-4 h-4 text-[#7B1123] shrink-0 mt-0.5" />
               <span>
-                Kareem Shah Complex, Fatehabad Road (Opp. Pizza Hut),
+                Karim Complex, Fatehabad Rd (Opp. Pizza Hut),
                 <br />
-                Tajganj, Agra, Uttar Pradesh 282001, India
+                Khairati Tola, Tajganj, Agra, UP 282001
               </span>
             </p>
             <p className="text-stone-800 flex items-center gap-2 font-bold">
@@ -105,10 +105,10 @@ export default function Footer({
             </p>
             <p className="text-stone-800 font-bold flex items-center gap-2">
               <Clock className="w-4 h-4 text-[#D4AF37] shrink-0" />
-              <span>Mon &ndash; Sat: 9:00 AM &ndash; 7:30 PM</span>
+              <span>Mon &ndash; Sat: 10:00 AM &ndash; 2:00 PM &amp; 5:00 PM &ndash; 8:00 PM</span>
             </p>
             <p className="text-stone-500 text-xs leading-relaxed">
-              Same-day walk-in emergency care and local Agra OPD consultations always welcome.
+              Closed Sunday. Appointments recommended; same-day local Agra OPD and visiting guests welcome.
             </p>
           </div>
 

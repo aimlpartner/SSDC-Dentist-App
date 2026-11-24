@@ -61,7 +61,7 @@ export default function DoctorsSection({
                     <img
                       src={doc.avatarUrl}
                       alt={doc.name}
-                      className="w-20 h-20 rounded-xl object-cover grayscale group-hover:grayscale-0 transition-all duration-500 border border-stone-200 shrink-0"
+                      className="w-20 h-20 rounded-xl object-cover object-top transition-all duration-500 border border-stone-200 shrink-0"
                     />
                     <div className="space-y-1">
                       <span className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-[#D4AF37] block">

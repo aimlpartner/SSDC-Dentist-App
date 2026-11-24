@@ -8,33 +8,30 @@ export default function TestimonialsSection() {
   const reviews = [
     {
       id: 1,
-      name: 'Sarah Jenkins',
-      origin: 'London, United Kingdom',
-      treatment: '6 E-Max Porcelain Veneers',
+      name: 'Rahul Mangla',
+      origin: 'Verified Google Review · Agra',
+      treatment: 'Comprehensive Dental Care',
       quote:
-        'I flew to India to visit the Taj Mahal and fix my smile. The team at SSDC arranged my Oberoi hotel transfer, and Dr. Sapna gave me the most radiant, natural veneers I could ever imagine. I saved over £4,000 compared to London Harley Street.',
-      avatar:
-        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+        'Dr. Saurabh and Dr. Sapna and their team are the most professional, kind, and caring people I have ever met. They do their job with great intent and truly value your time and comfort with their experience.',
+      initials: 'RM',
     },
     {
       id: 2,
-      name: 'Mark Reynolds',
-      origin: 'Sydney, Australia',
-      treatment: 'German Zirconia Implant',
+      name: 'Shweta Sharma',
+      origin: 'Verified Google Review · Agra',
+      treatment: 'Painless Root Canal (RCT)',
       quote:
-        'Dr. Saurabh is a brilliant dental surgeon. The 3D CBCT guided implant procedure was 100% painless. I was walking around Agra Fort the very next afternoon. The WhatsApp desk sent all my appointment reminders effortlessly.',
-      avatar:
-        'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+        'Best dentist in town — so gentle in their procedures that even my 4-year-old son got his root canal done without pain. Special mention to the doctors’ behaviour, it is remarkably polite.',
+      initials: 'SS',
     },
     {
       id: 3,
-      name: 'Vikram Singhal',
-      origin: 'DayalBagh, Agra',
-      treatment: 'Laser Whitening & Scaling',
+      name: 'Ankit Porwal',
+      origin: 'Verified Google Review · Agra',
+      treatment: 'Restorative Dentistry',
       quote:
-        'As Agra locals, our entire family relies on SSDC. We can walk in anytime, and the staff treats us with immense warmth and clinical hygiene. Teeth whitening took only 45 minutes before my wedding.',
-      avatar:
-        'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+        'Great place to take care of your teeth. The doctor explained every step of the treatment before performing it, so my fear for dental treatments vanished completely. Very clean and disinfected ambience.',
+      initials: 'AP',
     },
   ];
 
@@ -90,11 +87,9 @@ export default function TestimonialsSection() {
               </div>
 
               <div className="flex items-center gap-3.5 pt-2">
-                <img
-                  src={rev.avatar}
-                  alt={rev.name}
-                  className="w-11 h-11 rounded-full object-cover grayscale border border-stone-200"
-                />
+                <div className="w-11 h-11 rounded-full bg-[#7B1123]/10 border border-[#7B1123]/20 text-[#7B1123] flex items-center justify-center font-funky font-extrabold text-sm shrink-0">
+                  {rev.initials}
+                </div>
                 <div>
                   <h4 className="font-funky font-extrabold text-sm text-stone-950">
                     {rev.name}

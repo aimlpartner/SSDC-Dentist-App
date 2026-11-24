@@ -144,15 +144,15 @@ export default function HeroSection({
             </g>
           </svg>
 
-          {/* Clean Circular Smile Medallion */}
+          {/* Clean Circular Clinic Consultation Medallion */}
           <motion.div
             style={{ x: medallionX, y: medallionY }}
             className="absolute -bottom-5 -right-8 w-24 xl:w-28 h-24 xl:h-28 rounded-full overflow-hidden border-4 border-white shadow-xl"
           >
             <img
-              src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=85"
-              alt=""
-              className="w-full h-full object-cover"
+              src="/images/clinic/consultation.jpg"
+              alt="SSDC Agra consultation"
+              className="w-full h-full object-cover object-center"
             />
           </motion.div>
         </div>
@@ -192,7 +192,7 @@ export default function HeroSection({
             </defs>
             <g clipPath="url(#rightClinicArchClip)">
               <image
-                href="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=900&q=85"
+                href="/images/clinic/operatory.jpg"
                 width="260"
                 height="400"
                 preserveAspectRatio="xMidYMid slice"
@@ -200,15 +200,15 @@ export default function HeroSection({
             </g>
           </svg>
 
-          {/* Clean Circular Agra Heritage Medallion */}
+          {/* Clean Circular Chairside Care Medallion */}
           <motion.div
             style={{ x: medallionX, y: medallionY }}
             className="absolute -bottom-5 -left-8 w-24 xl:w-28 h-24 xl:h-28 rounded-full overflow-hidden border-4 border-white shadow-xl"
           >
             <img
-              src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=600&q=85"
-              alt=""
-              className="w-full h-full object-cover"
+              src="/images/clinic/dr-saurabh-chair.jpg"
+              alt="SSDC Agra chairside care"
+              className="w-full h-full object-cover object-top"
             />
           </motion.div>
         </div>
