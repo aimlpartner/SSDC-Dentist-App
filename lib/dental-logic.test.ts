@@ -7,8 +7,8 @@ import {
   generateNotificationMessage, 
   computeClinicStats,
   DENTAL_PROCEDURES 
-} from './dental-logic';
-import { Appointment, Doctor } from './types';
+} from './dental-logic.ts';
+import type { Appointment, Doctor } from './types.ts';
 
 test('Dental procedures catalogue has valid Agra Taj treatments', () => {
   assert.ok(DENTAL_PROCEDURES.length >= 5);
@@ -111,7 +111,7 @@ test('generateNotificationMessage crafts both WhatsApp and Email messages', () =
   };
 
   const whatsappConfirmation = generateNotificationMessage('booking_confirmation', sample, 'whatsapp');
-  assert.ok(whatsappConfirmation.body.includes('Taj White Pearl'));
+  assert.ok(whatsappConfirmation.body.includes('SSDC'));
   assert.ok(whatsappConfirmation.body.includes('TWP-4040'));
   assert.ok(whatsappConfirmation.body.includes('Dental Tourism Support'));
 
