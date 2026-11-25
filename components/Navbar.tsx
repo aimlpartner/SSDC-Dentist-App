@@ -112,6 +112,12 @@ export default function Navbar({
               Our Doctors
             </button>
             <button
+              onClick={() => handleNavClick('gallery')}
+              className="hover:text-[#7B1123] transition-colors cursor-pointer whitespace-nowrap py-1"
+            >
+              Gallery
+            </button>
+            <button
               onClick={() => handleNavClick('reviews')}
               className="hover:text-[#7B1123] transition-colors cursor-pointer whitespace-nowrap py-1"
             >
@@ -286,6 +292,9 @@ export default function Navbar({
             </button>
             <button onClick={() => handleNavClick('specialists')} className="text-left py-1">
               Our Doctors
+            </button>
+            <button onClick={() => handleNavClick('gallery')} className="text-left py-1">
+              Gallery
             </button>
             <button onClick={() => handleNavClick('reviews')} className="text-left py-1">
               Reviews

@@ -11,6 +11,7 @@ import {
   DentalTourismSection,
   ServicesSection,
   DoctorsSection,
+  ClinicGallerySection,
   TestimonialsSection,
   Footer,
 } from '@/modules/landing';
@@ -397,6 +398,8 @@ export default function Home() {
               onOpenBooking={() => setIsBookingOpen(true)}
               selectedCurrency={selectedCurrency}
             />
+
+            <ClinicGallerySection />
 
             <TestimonialsSection />
 
